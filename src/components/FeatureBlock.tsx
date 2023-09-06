@@ -33,7 +33,7 @@ export default function FeatureBlock({
         </div>
         <div className="flex-1 relative rounded-3xl overflow-hidden w-full aspect-video lg:aspect-auto">
           <Image
-            src={`${process.env["BACKEND_HOST"]}${image.url}`}
+            src={`${process.env["BACKEND_HOST"] ?? ""}${image.url}`}
             alt={image.alt}
             style={{objectFit: "cover"}}
             fill

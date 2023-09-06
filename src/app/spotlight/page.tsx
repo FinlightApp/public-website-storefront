@@ -92,7 +92,7 @@ export default async function Home() {
           >
             <div className="flex-1 relative max-h-60">
               <Image
-                src={`${process.env["BACKEND_HOST"]}${item.attributes.Image.data.attributes.url}`}
+                src={`${process.env["BACKEND_HOST"] ?? ""}${item.attributes.Image.data.attributes.url}`}
                 alt={item.attributes.Image.data.attributes.alternativeText}
                 style={{objectFit: "cover"}}
                 fill

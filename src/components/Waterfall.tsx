@@ -45,7 +45,7 @@ export default function Waterfall({
                 <div className={`flex-1 ${sizes[itemSize]} flex flex-row p-6 gap-8`}>
                   <div className="shrink-0 w-12 h-12 relative rounded-lg overflow-hidden">
                     <Image
-                      src={`${process.env["BACKEND_HOST"]}${step.Image?.data?.attributes?.url}`}
+                      src={`${process.env["BACKEND_HOST"] ?? ""}${step.Image?.data?.attributes?.url}`}
                       alt={step.Image?.data?.attributes?.alternativeText}
                       style={{objectFit: "cover"}}
                       fill

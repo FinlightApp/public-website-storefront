@@ -20,7 +20,7 @@ export default function TeamCard({
     >
       <div className="w-24 h-24 relative rounded-full overflow-hidden">
         <Image
-          src={`${process.env["BACKEND_HOST"]}${image.url}`}
+          src={`${process.env["BACKEND_HOST"] ?? ""}${image.url}`}
           alt={image.alt}
           style={{objectFit: "cover"}}
           fill
