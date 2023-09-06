@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
+import CSS from 'csstype'
 
 import Container from '@/components/Container'
 
@@ -20,18 +21,18 @@ async function fetchAPI(query: string) {
     return res.json()
   }
 
-const imageStyle = {
-    objectFit: "cover",
-    width: "80%",
-    maxHeight:"25rem",
-    marginRight: "auto",
-    marginLeft: "auto",
-    borderRadius: "1.5rem"
-}
-
 export default async function Page({ params }: { params: { slug: string } }) {
 
-    const getPost = `
+  const imageStyle: CSS.Properties = {
+      objectFit: "cover",
+      width: "80%",
+      maxHeight:"25rem",
+      marginRight: "auto",
+      marginLeft: "auto",
+      borderRadius: "1.5rem"
+  }
+
+  const getPost = `
     query Post {
       posts (filters: {Slug : { eq: "${params.slug}" }}) {
           data {
@@ -53,14 +54,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
     }
   `
 
-    const post = await fetchAPI(getPost)
-    const title = post?.data?.posts?.data[0]?.attributes.Title
-    const image = {
-        provider: post?.data?.posts?.data[0]?.attributes.Image?.data?.attributes?.provider,
-        url: post?.data?.posts?.data[0]?.attributes.Image?.data?.attributes?.url,
-        alt: post?.data?.posts?.data[0]?.attributes.Image?.data?.attributes?.alternativeText,
-    }
-    const content = post?.data?.posts?.data[0]?.attributes.Content
+  const post = await fetchAPI(getPost)
+  const title = post?.data?.posts?.data[0]?.attributes.Title
+  const image = {
+      provider: post?.data?.posts?.data[0]?.attributes.Image?.data?.attributes?.provider,
+      url: post?.data?.posts?.data[0]?.attributes.Image?.data?.attributes?.url,
+      alt: post?.data?.posts?.data[0]?.attributes.Image?.data?.attributes?.alternativeText,
+  }
+  const content = post?.data?.posts?.data[0]?.attributes.Content
 
     return(
         <Container>
