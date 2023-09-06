@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import Container from '@/components/Container'
 
 async function fetchAPI(query: string) {
-  const host = process.env["GRAPHQL_HOST"]
+  const host = process.env["GRAPHQL_HOST"] ?? ""
   const res = await fetch(host, {
       method: 'POST',
       headers: {

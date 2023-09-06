@@ -5,7 +5,7 @@ import Container from '@/components/Container'
 import Hero from '@/components/Hero'
 
 async function fetchAPI(query: string) {
-  const host = process.env["GRAPHQL_HOST"]
+  const host = process.env["GRAPHQL_HOST"] ?? ""
   const res = await fetch(host, {
     method: 'POST',
     headers: {
