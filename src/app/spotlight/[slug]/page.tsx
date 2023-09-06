@@ -130,7 +130,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
                             ol: ({node, ...props}) => <ol className='list-decimal list-inside px-4' {...props} />,
                             ul: ({node, ...props}) => <ol className='list-disc list-inside px-4' {...props} />,
                             li: ({node, ...props}) => <li className='pb-4' {...props} />,
-                            img: ({node, ...props}) => <Image alt={props.alt} src={`${process.env["BACKEND_HOST"] ?? ""}${props.src}`} width={1800} height={1200} style={imageStyle} loading="lazy" />,
+                            img: ({node, ...props}) => <Image alt={props.alt} src={`${process.env["BACKEND_HOST"] ?? ""}${props.src}`} width={1800} height={1200} style={{
+                              objectFit: "cover",
+                              width: "80%",
+                              maxHeight:"25rem",
+                              marginRight: "auto",
+                              marginLeft: "auto",
+                              borderRadius: "1.5rem"
+                          }} loading="lazy" />,
                         }}
                     >
                         {content}
