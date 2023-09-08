@@ -39,11 +39,12 @@ const getHero = `
 
 const getPosts = `
   query Posts {
-    posts (pagination: { limit: 100 }) {
+    posts (pagination: { limit: 100 }, sort: "Published:desc" ) {
     	data {
         id
         attributes {
           Slug
+          Published
           Title
           Image {
             data {
@@ -80,6 +81,7 @@ export default async function Home() {
             id: string,
             attributes: {
               Slug: string,
+              Published: string,
               Title: string,
               Image: { data: { attributes: { provider: string, url: string, alternativeText: string } } }
               Content: string,
@@ -88,9 +90,9 @@ export default async function Home() {
           <Link
             key={item.id}
             href={`/spotlight/${item.attributes.Slug}`}
-            className='flex flex-col rounded-lg overflow-hidden h-96 w-[20rem] drop-shadow-sm border border-gray-300'
+            className='flex flex-col rounded-lg overflow-hidden h-96 w-[20rem] bg-purple-100'
           >
-            <div className="flex-1 relative max-h-60">
+            <div className="flex-1 relative max-h-[10rem] min-h-[10rem]">
               <Image
                 src={`${process.env["BACKEND_HOST"] ?? ""}${item.attributes.Image.data.attributes.url}`}
                 alt={item.attributes.Image.data.attributes.alternativeText}
@@ -99,10 +101,13 @@ export default async function Home() {
                 loading="lazy"
               />
             </div>
-            <div className='flex flex-col p-6 gap-2'>
+            <div className='flex-1 flex flex-col p-6 gap-2 justify-between'>
               <h3 className='text-xl font-semibold leading-7 text-gray-900'>
                 {item.attributes.Title}
               </h3>
+              <p className='text-base font-normal leading-6 text-right text-purple-700'>
+                Published {new Date(Date.parse(item.attributes.Published)).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </p>
             </div>
           </Link>
         )}

@@ -85,7 +85,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 {title &&
                 <h1
                     className={`
-                    text-7xl font-bold leading-[5.625rem]
+                    text-5xl font-bold leading-10
                     text-center
                     text-purple-50
                     `}
