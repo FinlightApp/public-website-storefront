@@ -87,7 +87,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <header
             className="
                 relative
-                pt-8 pb-80
+                pt-4 pb-64 md:pt-8 md:pb-80 px-8 lg:px-0
             "
             >
             <div
@@ -95,8 +95,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 flex
                 flex-col
                 justify-center items-center
-                p-24
-                gap-12
+                p-4 pb-8 md:p-24
+                gap-6 md:gap-12
                 rounded-3xl
                 bg-purple-700
                 `}
@@ -104,7 +104,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 {title &&
                 <h1
                     className={`
-                    text-5xl font-bold leading-10
+                    text-2xl lg:text-5xl font-bold leading-10
                     text-center
                     text-purple-50
                     `}
@@ -114,7 +114,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 }
                 {author &&
                 <div className='flex flex-row gap-3'>
-
                   <Image
                     src={`${process.env["BACKEND_HOST"] ?? ""}${author.data.attributes.Avatar.data.attributes.url}`}
                     alt={author.data.attributes.Avatar.data.attributes.alternativeText}
@@ -143,7 +142,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   z-10
               "
               >
-                <div className="w-8/12 h-96 relative rounded-3xl overflow-hidden">
+                <div className="w-8/12 h-72 md:h-96 relative rounded-3xl overflow-hidden">
                   <Image
                     src={`${process.env["BACKEND_HOST"] ?? ""}${image.url}`}
                     alt={image.alt}
