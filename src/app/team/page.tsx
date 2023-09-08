@@ -2,8 +2,6 @@ import Container from '@/components/Container'
 import Hero from '@/components/Hero'
 import TeamCard from '@/components/TeamCard'
 
-import Image from 'next/image'
-
 async function fetchAPI(query: string) {
   const host = process.env["GRAPHQL_HOST"] ?? ""
   const res = await fetch(host, {
@@ -46,6 +44,7 @@ const getTeam = `
             id
             Name
             Role
+            LinkedIn
             Image {
               data {
                 attributes {
@@ -84,6 +83,7 @@ export default async function Home() {
                 id: number,
                 Name: string,
                 Role: string,
+                LinkedIn: string,
                 Image: { data: { attributes: { provider: string, url: string, alternativeText: string } } }
               }
             }
@@ -92,6 +92,7 @@ export default async function Home() {
               key={item.attributes.Member.id}
               name={item.attributes.Member.Name}
               role={item.attributes.Member.Role}
+              link={item.attributes.Member.LinkedIn}
               image={{
                 provider: item?.attributes?.Member.Image?.data?.attributes?.provider,
                 url: item?.attributes?.Member.Image?.data?.attributes?.url,
