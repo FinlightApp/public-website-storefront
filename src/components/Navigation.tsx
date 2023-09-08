@@ -24,7 +24,7 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-<nav className="flex items-center justify-between flex-wrap gap-4 lg:gap-10 px-8 py-6">
+    <nav className="flex items-center justify-between flex-wrap gap-4 lg:gap-10 px-8 py-6">
      <Link className="flex items-center flex-shrink-0 gap-3" href="/">
         <Image
           src="/logo.svg"
