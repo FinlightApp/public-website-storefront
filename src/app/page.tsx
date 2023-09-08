@@ -3,6 +3,7 @@ import Hero from '@/components/Hero'
 import FeatureBlock from '@/components/FeatureBlock'
 import Waterfall from '@/components/Waterfall'
 import FAQ from '@/components/FAQ'
+import Partners from '@/components/Partners'
 
 
 async function fetchAPI(query: string) {
@@ -110,12 +111,35 @@ const getFAQ = `
   }
 `
 
+const getPartners = `
+  query Partners {
+    partners {
+      data {
+        attributes {
+          Name
+          Link
+          Logo {
+            data {
+              attributes {
+                provider
+                url
+                alternativeText
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 export default async function Home() {
 
   const hero = await fetchAPI(getHero)
   const features = await fetchAPI(getFeatures)
   const faq = await fetchAPI(getFAQ)
   const steps = await fetchAPI(getSteps)
+  const partners = await fetchAPI(getPartners)
 
   return (
     <Container>
@@ -181,6 +205,10 @@ export default async function Home() {
           quiz={item?.attributes?.QuestionResponse}
         />
       )}
+      <Partners
+        title="Our Partners"
+        partners={partners?.data.partners.data}
+      />
     </Container>
 
   )
