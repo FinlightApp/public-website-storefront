@@ -23,10 +23,6 @@ import {
     LinkedinIcon,
 } from 'next-share'
 import {
-    FacebookMessengerShareButton,
-    FacebookMessengerIcon,
-} from 'next-share'
-import {
     EmailShareButton,
     EmailIcon,
 } from 'next-share'
@@ -51,12 +47,6 @@ export default function Social({
             >
                 <FacebookIcon size={32} round />
             </FacebookShareButton>
-            <FacebookMessengerShareButton
-                url={`${origin}${pathname}`}
-                appId={''}
-            >
-                <FacebookMessengerIcon size={32} round />
-            </FacebookMessengerShareButton>
             <TelegramShareButton
                 url={`${origin}${pathname}`}
                 title={quote}
