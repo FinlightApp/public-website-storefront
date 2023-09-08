@@ -37,6 +37,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       posts (filters: {Slug : { eq: "${params.slug}" }}) {
           data {
           attributes {
+            Published
             Title
             Image {
               data {
@@ -48,6 +49,22 @@ export default async function Page({ params }: { params: { slug: string } }) {
               }
             }
             Content
+            author {
+              data {
+                attributes {
+                  Name
+                  Avatar {
+                    data {
+                      attributes {
+                        provider
+                        url
+                        alternativeText
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -55,6 +72,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   `
 
   const post = await fetchAPI(getPost)
+  const publishedDate = post?.data?.posts?.data[0]?.attributes.Published
   const title = post?.data?.posts?.data[0]?.attributes.Title
   const image = {
       provider: post?.data?.posts?.data[0]?.attributes.Image?.data?.attributes?.provider,
@@ -62,6 +80,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       alt: post?.data?.posts?.data[0]?.attributes.Image?.data?.attributes?.alternativeText,
   }
   const content = post?.data?.posts?.data[0]?.attributes.Content
+  const author = post?.data?.posts?.data[0]?.attributes.author
 
     return(
         <Container>
@@ -93,26 +112,47 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     {title}
                 </h1>
                 }
-            </div>
-                <div
-                className="
-                    absolute
-                    inset-x-0 bottom-0
-                    flex
-                    justify-center
-                    z-10
-                "
-                >
-                    <div className="w-8/12 h-96 relative rounded-3xl overflow-hidden">
-                        <Image
-                            src={`${process.env["BACKEND_HOST"] ?? ""}${image.url}`}
-                            alt={image.alt}
-                            style={{objectFit: "cover"}}
-                            fill
-                            loading="lazy"
-                        />
-                    </div>
+                {author &&
+                <div className='flex flex-row gap-3'>
+
+                  <Image
+                    src={`${process.env["BACKEND_HOST"] ?? ""}${author.data.attributes.Avatar.data.attributes.url}`}
+                    alt={author.data.attributes.Avatar.data.attributes.alternativeText}
+                    width={48}
+                    height={48}
+                    style={{borderRadius: "9999px"}}
+                    loading="lazy"
+                  />
+                  <div className='flex flex-col justify-between'>
+                    <p className='font-bold leading-6 text-purple-50'>
+                      {author.data.attributes.Name}
+                    </p>
+                    <p className='leading-6 text-purple-200'>
+                      {new Date(Date.parse(publishedDate)).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </p>
+                  </div>
                 </div>
+                }
+            </div>
+              <div
+              className="
+                  absolute
+                  inset-x-0 bottom-0
+                  flex
+                  justify-center
+                  z-10
+              "
+              >
+                <div className="w-8/12 h-96 relative rounded-3xl overflow-hidden">
+                  <Image
+                    src={`${process.env["BACKEND_HOST"] ?? ""}${image.url}`}
+                    alt={image.alt}
+                    style={{objectFit: "cover"}}
+                    fill
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </header>
             <div className="flex flex-row py-12">
                 <div className="flex-2" />
