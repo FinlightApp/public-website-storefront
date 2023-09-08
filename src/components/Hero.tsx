@@ -55,7 +55,7 @@ export default function Hero({
           </p>
         }
         {cta && page === "spotlight" &&
-          <div className="flex flex-row justify-center items-start gap-8">
+          <div className="flex flex-col  md:flex-row justify-center items-start gap-8">
             <label
               htmlFor=""
               className="
@@ -79,6 +79,7 @@ export default function Hero({
             <button
               type="button"
               className="
+                w-full md:w-auto
                 px-5 py-2
                 text-base font-semibold leading-6 text-purple-50
                 border border-purple-600 rounded-lg
