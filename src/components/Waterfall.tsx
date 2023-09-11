@@ -46,7 +46,7 @@ export default function Waterfall({
                 className="flex-1 flex flex-row"
               >
                 <div className={`invisible md:visible ${sizes[leftItemSize]}`} />
-                <div className={`flex-1 ${sizes[itemSize]} flex flex-row p-6 gap-8`}>
+                <div className={`flex-1 ${sizes[itemSize]} flex ${bigger ? "flex-col md:flex-row" : "flex-row"} p-6 gap-8`}>
                   <div className={`shrink-0 ${bigger ? "w-24 h-24" : "w-12 h-12"} relative rounded-lg overflow-hidden`}>
                     <Image
                       src={`${process.env["BACKEND_HOST"] ?? ""}${step.Image?.data?.attributes?.url}`}
