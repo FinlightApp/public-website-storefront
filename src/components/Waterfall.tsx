@@ -16,7 +16,8 @@ const sizes: {[key: number]: string} = {
 
 export default function Waterfall({
   title,
-  steps
+  steps,
+  bigger
 }: {
   title: string,
   steps: {
@@ -24,18 +25,21 @@ export default function Waterfall({
     Title: string,
     Description: string,
     Image: { data: { attributes: { provider: string, url: string, alternativeText: string } } }
-  }[]
+  }[],
+  bigger: boolean
 }) {
     return (
       <section className="flex flex-col px-8 py-16 lg:py-24 gap-16">
-        <h2 className="text-4xl font-semibold leading-10 text-gray-900 text-center">
-          {title}
-        </h2>
+        {title &&
+          <h2 className="text-4xl font-semibold leading-10 text-gray-900 text-center">
+            {title}
+          </h2>
+        }
         <div className="flex flex-col gap-8">
           {steps.map((step, i) => {
-            const itemSize: number = steps.length - 1
+            const itemSize: number = steps.length - (bigger ? 0 : 1)
             const leftItemSize: number = i
-            const rightItemSize: number = steps.length -1 - i
+            const rightItemSize: number = steps.length - 1 - i
             return (
               <div
                 key={step.id}
@@ -43,7 +47,7 @@ export default function Waterfall({
               >
                 <div className={`invisible md:visible ${sizes[leftItemSize]}`} />
                 <div className={`flex-1 ${sizes[itemSize]} flex flex-row p-6 gap-8`}>
-                  <div className="shrink-0 w-12 h-12 relative rounded-lg overflow-hidden">
+                  <div className={`shrink-0 ${bigger ? "w-24 h-24" : "w-12 h-12"} relative rounded-lg overflow-hidden`}>
                     <Image
                       src={`${process.env["BACKEND_HOST"] ?? ""}${step.Image?.data?.attributes?.url}`}
                       alt={step.Image?.data?.attributes?.alternativeText}

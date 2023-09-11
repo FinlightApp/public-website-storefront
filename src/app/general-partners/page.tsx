@@ -1,9 +1,8 @@
 import Container from '@/components/Container'
 import Hero from '@/components/Hero'
-import FeatureBlock from '@/components/FeatureBlock'
 import Waterfall from '@/components/Waterfall'
-import FAQ from '@/components/FAQ'
-import Partners from '@/components/Partners'
+import FeatureBlock from '@/components/FeatureBlock'
+import CTA from '@/components/CTA'
 
 
 async function fetchAPI(query: string) {
@@ -23,29 +22,14 @@ async function fetchAPI(query: string) {
   return res.json()
 }
 
-const getHero = `
-  query Hero {
-    heroes (filters: { Page: { eq: "home" }}) {
-      data {
-        attributes {
-          Page
-          Version
-          Title
-          Subtitle
-          CTA
-        }
-      }
-    }
-  }
-`
-
 const getFeatures = `
   query Features {
-    featureBlocks (filters: { Page: { eq: "home" }}) {
+    featureBlocks (filters: { Page: { eq: "general-partners" }}) {
       data {
         id
         attributes {
           Title
+          Subtitle
           Feature{
             id
             Title
@@ -65,10 +49,9 @@ const getFeatures = `
     }
   }
 `
-
 const getSteps = `
   query Steps {
-    stepsBlocks (filters: { Page: { eq: "home" }}) {
+    stepsBlocks (filters: { Page: { eq: "general-partners" }}) {
       data {
         id
         attributes {
@@ -93,64 +76,73 @@ const getSteps = `
   }
 `
 
-const getFAQ = `
-  query FAQ {
-    faqBlocks {
-      data {
-        id
-        attributes {
-          Title
-          QuestionResponse {
-            id
-            Question
-            Response
-          }
-        }
-      }
-    }
-  }
-`
+export default async function GeneralPartners() {
 
-const getPartners = `
-  query Partners {
-    partners {
-      data {
-        attributes {
-          Name
-          Link
-          Logo {
-            data {
-              attributes {
-                provider
-                url
-                alternativeText
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
-export default async function Home() {
-
-  const hero = await fetchAPI(getHero)
   const features = await fetchAPI(getFeatures)
-  const faq = await fetchAPI(getFAQ)
   const steps = await fetchAPI(getSteps)
-  const partners = await fetchAPI(getPartners)
+  console.log(steps)
 
   return (
     <Container>
       <Hero
-        page={hero?.data?.heroes?.data[0]?.attributes?.Page}
-        version={hero?.data?.heroes?.data[0]?.attributes?.Version}
-        title={hero?.data?.heroes?.data[0]?.attributes?.Title}
-        subtitle={hero?.data?.heroes?.data[0]?.attributes?.Subtitle}
-        cta={hero?.data?.heroes?.data[0]?.attributes?.CTA}
+        page="distributors"
+        version="minimal"
+        title="Fund Structuring Services & VC Fund Management Software for GPs"
+        subtitle=""
+        cta={false}
       />
-      {features?.data?.featureBlocks?.data.map((
+      {features?.data?.featureBlocks?.data.slice(0,1).map((
+        item: {
+          id: string,
+          attributes: {
+            Title: string,
+            Subtitle: string,
+            Feature: { id: string, Title: string, Description: string }[],
+            Image: { data: { attributes: { provider: string, url: string, alternativeText: string } } }
+          }
+        },
+        i: number) =>
+        <FeatureBlock
+          key={item?.id}
+          title={item?.attributes?.Title}
+          subtitle={item?.attributes?.Subtitle}
+          reverse={Boolean(i%2)}
+          features={item?.attributes?.Feature}
+          image={{
+            provider: item?.attributes?.Image?.data?.attributes?.provider,
+            url: item?.attributes?.Image?.data?.attributes?.url,
+            alt: item?.attributes?.Image?.data?.attributes?.alternativeText
+          }}
+        />
+      )}
+      <CTA
+        title='Open the door to US10bn+ in assets.'
+      />
+
+      {steps?.data?.stepsBlocks?.data.slice(1).map((
+        item: {
+          id: string,
+          attributes: {
+            Title: string,
+            Step: {
+              id: string,
+              Title: string,
+              Description: string,
+              Image: { data: { attributes: { provider: string, url: string, alternativeText: string } } }
+            }[],
+          }
+        }) =>
+        <Waterfall
+          key={item?.id}
+          title={item?.attributes?.Title}
+          steps={item?.attributes?.Step}
+          bigger={true}
+        />
+      )}
+      <CTA
+        title='Ready to Dorhyo?'
+      />
+      {features?.data?.featureBlocks?.data.slice(0,-1).map((
         item: {
           id: string,
           attributes: {
@@ -172,7 +164,7 @@ export default async function Home() {
           }}
         />
       )}
-      {steps?.data?.stepsBlocks?.data.map((
+      {steps?.data?.stepsBlocks?.data.slice(0,-1).map((
         item: {
           id: string,
           attributes: {
@@ -189,28 +181,34 @@ export default async function Home() {
           key={item?.id}
           title={item?.attributes?.Title}
           steps={item?.attributes?.Step}
-          bigger={false}
+          bigger={true}
         />
       )}
-      {faq?.data?.faqBlocks?.data.map((
+      <CTA
+        title='Ready to optimise your fund management?'
+      />
+      {features?.data?.featureBlocks?.data.slice(-1).map((
         item: {
           id: string,
           attributes: {
             Title: string,
-            QuestionResponse: { id: string, Question: string, Response: string }[],
+            Feature: { id: string, Title: string, Description: string }[],
+            Image: { data: { attributes: { provider: string, url: string, alternativeText: string } } }
           }
-        }) =>
-        <FAQ
+        },
+        i: number) =>
+        <FeatureBlock
           key={item?.id}
           title={item?.attributes?.Title}
-          quiz={item?.attributes?.QuestionResponse}
+          reverse={Boolean(i%2)}
+          features={item?.attributes?.Feature}
+          image={{
+            provider: item?.attributes?.Image?.data?.attributes?.provider,
+            url: item?.attributes?.Image?.data?.attributes?.url,
+            alt: item?.attributes?.Image?.data?.attributes?.alternativeText
+          }}
         />
       )}
-      <Partners
-        title="Our Partners"
-        partners={partners?.data.partners.data}
-      />
     </Container>
-
   )
 }
