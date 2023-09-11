@@ -141,6 +141,7 @@ export default async function PrivacyPolicy() {
         <FeatureBlock
           key={item?.id}
           title={item?.attributes?.Title}
+          subtitle=''
           reverse={Boolean(i%2)}
           features={item?.attributes?.Feature}
           image={{
