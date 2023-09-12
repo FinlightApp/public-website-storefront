@@ -17,6 +17,18 @@ const links = [
     label: "Spotlight",
     href: "/spotlight"
   },
+  {
+    label: "Test A",
+    href: "/test-a"
+  },
+  {
+    label: "Test B",
+    href: "/test-b"
+  },
+  {
+    label: "Test C",
+    href: "/test-c"
+  },
 ]
 
 export default function Navigation() {
