@@ -1,15 +1,21 @@
+import Link from "next/link"
+
 export default function Hero({
   page,
   color,
   title,
   subtitle,
-  cta
+  cta,
+  cta_content,
+  cta_href,
 }: {
   page: string,
   color?: string,
   title: string,
   subtitle: string,
-  cta: boolean
+  cta: boolean,
+  cta_content?: string,
+  cta_href?: string,
 }) {
 
   return (
@@ -88,7 +94,7 @@ export default function Hero({
           </div>
         }
       </div>
-      {cta && page === "home" &&
+      {cta && page !== "spotlight" &&
         <div
           className="
             absolute
@@ -98,7 +104,8 @@ export default function Hero({
             z-10
           "
         >
-          <button
+          <Link
+            href={cta_href || ""}
             className="
               px-7 py-4
               rounded-lg
@@ -107,8 +114,8 @@ export default function Hero({
               bg-purple-600
             "
           >
-            Create an account
-          </button>
+            {cta_content || "Button"}
+          </Link>
         </div>
       }
     </header>

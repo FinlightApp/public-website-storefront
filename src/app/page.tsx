@@ -34,6 +34,8 @@ const getHero = `
           Title
           Subtitle
           CTA
+          CTA_Text
+          CTA_Link
         }
       }
     }
@@ -150,6 +152,8 @@ export default async function Home() {
         title={hero?.data?.heroes?.data[0]?.attributes?.Title}
         subtitle={hero?.data?.heroes?.data[0]?.attributes?.Subtitle}
         cta={hero?.data?.heroes?.data[0]?.attributes?.CTA}
+        cta_content={hero?.data?.heroes?.data[0]?.attributes?.CTA_Text}
+        cta_href={hero?.data?.heroes?.data[0]?.attributes?.CTA_Link}
       />
       {features?.data?.featureBlocks?.data.map((
         item: {

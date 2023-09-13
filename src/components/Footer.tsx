@@ -41,7 +41,7 @@ export default function Footer() {
           </Link>
         ))}
       </div>
-      <p>Ⓒ MONEY-PEASY LTD - FINLIGHT.COMTM 2023</p>
+      <p>Ⓒ Dorhyo 2023</p>
     </footer>
   )
 }
