@@ -24,7 +24,7 @@ export default function Partners({
                 <Link className="relative flex items-center flex-shrink-0 gap-3 h-12 w-40" href={partner.attributes.Link}>
                     <Image
                     src={`${process.env["BACKEND_HOST"] ?? ""}${partner.attributes.Logo.data.attributes.url}`}
-                    alt={partner.attributes.Logo.data.attributes.alternativeText}
+                    alt={partner.attributes.Logo.data.attributes.alternativeText || ""}
                     style={{objectFit: "contain"}}
                     fill
                     loading="lazy"

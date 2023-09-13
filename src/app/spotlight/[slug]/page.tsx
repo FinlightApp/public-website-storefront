@@ -117,7 +117,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 <div className='flex flex-row gap-3'>
                   <Image
                     src={`${process.env["BACKEND_HOST"] ?? ""}${author.data.attributes.Avatar.data.attributes.url}`}
-                    alt={author.data.attributes.Avatar.data.attributes.alternativeText}
+                    alt={author.data.attributes.Avatar.data.attributes.alternativeText || ""}
                     width={48}
                     height={48}
                     style={{borderRadius: "9999px"}}
@@ -146,7 +146,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 <div className="w-8/12 h-72 md:h-96 relative rounded-3xl overflow-hidden">
                   <Image
                     src={`${process.env["BACKEND_HOST"] ?? ""}${image.url}`}
-                    alt={image.alt}
+                    alt={image.alt || ""}
                     style={{objectFit: "cover"}}
                     fill
                     loading="lazy"

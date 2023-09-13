@@ -25,7 +25,7 @@ const getHero = `
       data {
         attributes {
           Page
-          Version
+          FontColor
           Title
           Subtitle
           CTA
@@ -70,7 +70,7 @@ export default async function Home() {
     <Container>
       <Hero
         page={hero?.data?.heroes?.data[0]?.attributes?.Page}
-        version={hero?.data?.heroes?.data[0]?.attributes?.Version}
+        color={hero?.data?.heroes?.data[0]?.attributes?.FontColor}
         title={hero?.data?.heroes?.data[0]?.attributes?.Title}
         subtitle={hero?.data?.heroes?.data[0]?.attributes?.Subtitle}
         cta={hero?.data?.heroes?.data[0]?.attributes?.CTA}

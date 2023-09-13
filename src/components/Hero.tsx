@@ -1,14 +1,14 @@
 export default function Hero({
+  page,
+  color,
   title,
   subtitle,
-  version,
-  page,
   cta
 }: {
+  page: string,
+  color?: string,
   title: string,
   subtitle: string,
-  version: string,
-  page: string,
   cta: boolean
 }) {
 
@@ -27,16 +27,14 @@ export default function Hero({
           p-4 md:p-24
           gap-12
           rounded-3xl
-          ${version === "colorful" ? "bg-purple-700" : ""}
         `}
       >
         { title &&
           <h1
+            style={{color: color}}
             className={`
               text-4xl md:text-7xl font-bold leading-[2.75rem] md:leading-[5.625rem]
               text-center
-              ${version === "colorful" ? "text-purple-50" : "text-gray-900"}
-              ${version === "minimal" ? "text-gray-900" : "text-gray-900"}
             `}
           >
             {title}
@@ -44,11 +42,10 @@ export default function Hero({
         }
         {subtitle && 
           <p
+            style={{color: color}}
             className={`
               text-xl font-normal leading-7 lg:leading-8
               text-center
-              ${version === "colorful" ? "text-purple-50" : "text-gray-600"}
-              ${version === "minimal" ? "text-gray-600" : "text-gray-600"}
             `}
           >
             {subtitle}

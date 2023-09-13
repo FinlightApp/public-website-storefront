@@ -114,7 +114,6 @@ export default async function PrivacyPolicy() {
     <Container>
       <Hero
         page="distributors"
-        version="minimal"
         title="Investment Platforms and Distributors"
         subtitle=""
         cta={false}

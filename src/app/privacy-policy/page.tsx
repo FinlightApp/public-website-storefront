@@ -40,7 +40,6 @@ export default async function PrivacyPolicy() {
     <Container>
       <Hero
         page="privacy"
-        version="minimal"
         title="Privacy Policy"
         subtitle=""
         cta={false}

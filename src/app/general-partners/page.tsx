@@ -86,7 +86,6 @@ export default async function GeneralPartners() {
     <Container>
       <Hero
         page="distributors"
-        version="minimal"
         title="Fund Structuring Services & VC Fund Management Software for GPs"
         subtitle=""
         cta={false}

@@ -27,7 +27,7 @@ const getHero = `
       data {
         attributes {
           Page
-          Version
+          FontColor
           Title
           Subtitle
           CTA
@@ -70,7 +70,7 @@ export default async function Home() {
     <Container>
       <Hero
         page={hero?.data?.heroes?.data[0]?.attributes?.Page}
-        version={hero?.data?.heroes?.data[0]?.attributes?.Version}
+        color={hero?.data?.heroes?.data[0]?.attributes?.FontColor}
         title={hero?.data?.heroes?.data[0]?.attributes?.Title}
         subtitle={hero?.data?.heroes?.data[0]?.attributes?.Subtitle}
         cta={hero?.data?.heroes?.data[0]?.attributes?.CTA}
@@ -95,7 +95,7 @@ export default async function Home() {
             <div className="flex-1 relative max-h-[10rem] min-h-[10rem]">
               <Image
                 src={`${process.env["BACKEND_HOST"] ?? ""}${item.attributes.Image.data.attributes.url}`}
-                alt={item.attributes.Image.data.attributes.alternativeText}
+                alt={item.attributes.Image.data.attributes.alternativeText || ""}
                 style={{objectFit: "cover"}}
                 fill
                 loading="lazy"
