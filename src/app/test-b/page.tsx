@@ -26,9 +26,10 @@ const getHero = `
       data {
         attributes {
           Page
-          FontColor
           Title
+          Title_Font_Color
           Subtitle
+          Subtitle_Font_Color
           CTA
         }
       }
@@ -101,9 +102,10 @@ export default async function Home() {
     <Container>
       <Hero
         page={hero?.data?.heroes?.data[0]?.attributes?.Page}
-        color={hero?.data?.heroes?.data[0]?.attributes?.FontColor}
         title={hero?.data?.heroes?.data[0]?.attributes?.Title}
+        titleColor={hero?.data?.heroes?.data[0]?.attributes?.Title_Font_Color}
         subtitle={hero?.data?.heroes?.data[0]?.attributes?.Subtitle}
+        subtitleColor={hero?.data?.heroes?.data[0]?.attributes?.Subtitle_Font_Color}
         cta={hero?.data?.heroes?.data[0]?.attributes?.CTA}
       />
       {features?.data?.featureBlocks?.data.map((

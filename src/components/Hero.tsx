@@ -2,17 +2,19 @@ import Link from "next/link"
 
 export default function Hero({
   page,
-  color,
   title,
+  titleColor,
   subtitle,
+  subtitleColor,
   cta,
   cta_content,
   cta_href,
 }: {
   page: string,
-  color?: string,
   title: string,
+  titleColor?: string,
   subtitle: string,
+  subtitleColor?: string,
   cta: boolean,
   cta_content?: string,
   cta_href?: string,
@@ -37,7 +39,7 @@ export default function Hero({
       >
         { title &&
           <h1
-            style={{color: color}}
+            style={{color: titleColor}}
             className={`
               text-4xl md:text-7xl font-bold leading-[2.75rem] md:leading-[5.625rem]
               text-center
@@ -48,7 +50,7 @@ export default function Hero({
         }
         {subtitle && 
           <p
-            style={{color: color}}
+            style={{color: subtitleColor}}
             className={`
               text-xl font-normal leading-7 lg:leading-8
               text-center
