@@ -1,9 +1,23 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+const orderClass: {[key: number]: string} = {
+  1: 'order-1',
+  2: 'order-2',
+  3: 'order-3',
+  4: 'order-4',
+  5: 'order-5',
+  6: 'order-6',
+  7: 'order-7',
+  8: 'order-8',
+  9: 'order-9',
+  10: 'order-10',
+}
+
 export default function TeamCard({
-    name, role, link, image
+    order, name, role, link, image
   }: {
+    order: number,
     name: string,
     role: string,
     link: string,
@@ -11,7 +25,7 @@ export default function TeamCard({
   }) {
   return (
 
-    <div className="max-w-xs w-full lg:max-w-fit lg:flex bg-purple-50 p-6 rounded-lg">
+    <div className={`${orderClass[order]} max-w-xs w-full lg:max-w-fit lg:flex bg-purple-50 p-6 rounded-lg`}>
       <div className="relative aspect-square mx-auto h-40 lg:h-auto lg:w-40 rounded-full overflow-hidden">
         <Image
           src={`${process.env["BACKEND_HOST"] ?? ""}${image.url}`}

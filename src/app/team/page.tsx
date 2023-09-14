@@ -42,6 +42,7 @@ const getTeam = `
         attributes {
           Member {
             id
+            Order
             Name
             Role
             LinkedIn
@@ -81,6 +82,7 @@ export default async function Home() {
             attributes: {
               Member: {
                 id: number,
+                Order: number,
                 Name: string,
                 Role: string,
                 LinkedIn: string,
@@ -90,6 +92,7 @@ export default async function Home() {
           }) =>
             <TeamCard
               key={item.attributes.Member.id}
+              order={item.attributes.Member.Order}
               name={item.attributes.Member.Name}
               role={item.attributes.Member.Role}
               link={item.attributes.Member.LinkedIn}
